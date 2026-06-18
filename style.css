@@ -33,7 +33,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 10;
-    padding: 22px 40px 18px;
+    padding: 24px;
     margin-bottom: 96px;
     background: color-mix(in srgb, var(--background) 78%, transparent);
     backdrop-filter: saturate(140%) blur(12px);
@@ -70,10 +70,10 @@ body {
 
 .app {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
 
     max-width: 1280px;
     margin: 0 auto;
+    padding: 0 24px;
 }
 
 .message {
@@ -90,10 +90,6 @@ body {
     border: 1px solid var(--border);
     scroll-margin-top: 110px;
     transition: border-color 0.2s ease;
-
-    &:not(:last-child) {
-        border-right: none;
-    }
 }
 
 .category-header {
@@ -173,19 +169,35 @@ body {
     white-space: nowrap;
 }
 
-@media (max-width: 600px) {
-    .site-header {
-        padding: 18px 22px 14px;
-    }
-
-    .app {
-        padding: 36px 22px 72px;
-        column-gap: 32px;
-    }
-}
-
 @media (prefers-reduced-motion: reduce) {
     * {
         transition: none !important;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .app {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .category {
+        &:not(:last-child) {
+            border-right: none;
+        }
+    }
+}
+
+@media screen and (max-width: 767px){
+
+    .category {
+        &:not(:last-child) {
+            border-bottom: none;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .app {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
