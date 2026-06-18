@@ -6,14 +6,25 @@
       { "nom": "Craftwork", "url": "https://craftwork.design/curated/websites/" },
       { "nom": "Dribbble", "url": "https://dribbble.com/" },
       { "nom": "Behance", "url": "https://www.behance.net/" },
-      { "nom": "Pinterest", "url": "https://pinterest.com/" }
+      { "nom": "Pinterest", "url": "https://pinterest.com/" },
+      { "nom": "SEESAW", "url": "https://www.seesaw.website/" },
+      { "nom": "Deck Gallery", "url": "https://deck.gallery/" }
     ]
   },
   {
     "categorie": "Fonts",
     "liens": [
       { "nom": "Fontshare", "url": "https://fontshare.com/" },
-      { "nom": "Best Free Fonts", "url": "https://bestfreefonts.com/" }
+      { "nom": "Best Free Fonts", "url": "https://bestfreefonts.com/" },
+      { "nom": "Pousse ta fonte", "url": "https://www.poussetafonte.com/" }
+    ]
+  },
+  {
+    "categorie": "Icons",
+    "liens": [
+      { "nom": "Phosphor", "url": "https://phosphoricons.com/" },
+      { "nom": "Lucide", "url": "https://lucide.dev/" },
+      { "nom": "Iconoir", "url": "https://iconoir.com/" }
     ]
   }
 ]
