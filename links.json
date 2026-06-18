@@ -1,17 +1,19 @@
 [
   {
-    "categorie": "Portfolios",
+    "categorie": "Inspiration",
     "liens": [
-      { "nom": "Awwwards", "url": "https://www.awwwards.com" },
-      { "nom": "Behance", "url": "https://www.behance.net" },
-      { "nom": "Dribbble", "url": "https://dribbble.com" }
+      { "nom": "Collect UI", "url": "https://collectui.com/" },
+      { "nom": "Craftwork", "url": "https://craftwork.design/curated/websites/" },
+      { "nom": "Dribbble", "url": "https://dribbble.com/" },
+      { "nom": "Behance", "url": "https://www.behance.net/" },
+      { "nom": "Pinterest", "url": "https://pinterest.com/" }
     ]
   },
   {
-    "categorie": "Typographie",
+    "categorie": "Fonts",
     "liens": [
-      { "nom": "Fonts In Use", "url": "https://fontsinuse.com" },
-      { "nom": "Google Fonts", "url": "https://fonts.google.com" }
+      { "nom": "Fontshare", "url": "https://fontshare.com/" },
+      { "nom": "Best Free Fonts", "url": "https://bestfreefonts.com/" }
     ]
   }
 ]

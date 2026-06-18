@@ -41,7 +41,7 @@
     card.rel = "noopener noreferrer";
 
     let domain = "";
-    try { domain = new URL(lien.url).hostname; } catch (e) { domain = ""; }
+    try { domain = new URL(lien.url).hostname.replace(/^www\./, ""); } catch (e) { domain = ""; }
 
     const img = document.createElement("img");
     img.className = "card-favicon";
@@ -55,12 +55,16 @@
       img.replaceWith(fallback);
     });
 
+    const body = document.createElement("div");
+    body.className = "card-body";
+
     const name = document.createElement("span");
     name.className = "card-name";
     name.textContent = lien.nom;
+    body.appendChild(name);
 
     card.appendChild(img);
-    card.appendChild(name);
+    card.appendChild(body);
     return card;
   }
 
@@ -69,14 +73,26 @@
     section.className = "category";
     section.id = slugify(cat.categorie);
 
+    const header = document.createElement("div");
+    header.className = "category-header";
+
     const title = document.createElement("h2");
     title.className = "category-title";
     title.textContent = cat.categorie;
-    section.appendChild(title);
+    header.appendChild(title);
+
+    const liens = cat.liens || [];
+
+    const count = document.createElement("span");
+    count.className = "category-count";
+    count.textContent = liens.length;
+    header.appendChild(count);
+
+    section.appendChild(header);
 
     const grid = document.createElement("div");
     grid.className = "cards";
-    (cat.liens || []).forEach(function (lien) {
+    liens.forEach(function (lien) {
       grid.appendChild(buildCard(lien));
     });
     section.appendChild(grid);
