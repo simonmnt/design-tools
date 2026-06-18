@@ -25,13 +25,84 @@
     return data;
   }
 
+  function slugify(text) {
+    return text
+      .toLowerCase()
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  function buildCard(lien) {
+    const card = document.createElement("a");
+    card.className = "card";
+    card.href = lien.url;
+    card.target = "_blank";
+    card.rel = "noopener noreferrer";
+
+    let domain = "";
+    try { domain = new URL(lien.url).hostname; } catch (e) { domain = ""; }
+
+    const img = document.createElement("img");
+    img.className = "card-favicon";
+    img.alt = "";
+    img.loading = "lazy";
+    img.src = "https://www.google.com/s2/favicons?domain=" + encodeURIComponent(domain) + "&sz=64";
+    img.addEventListener("error", function () {
+      const fallback = document.createElement("span");
+      fallback.className = "card-fallback";
+      fallback.textContent = (lien.nom || "?").charAt(0);
+      img.replaceWith(fallback);
+    });
+
+    const name = document.createElement("span");
+    name.className = "card-name";
+    name.textContent = lien.nom;
+
+    card.appendChild(img);
+    card.appendChild(name);
+    return card;
+  }
+
+  function buildCategory(cat) {
+    const section = document.createElement("section");
+    section.className = "category";
+    section.id = slugify(cat.categorie);
+
+    const title = document.createElement("h2");
+    title.className = "category-title";
+    title.textContent = cat.categorie;
+    section.appendChild(title);
+
+    const grid = document.createElement("div");
+    grid.className = "cards";
+    (cat.liens || []).forEach(function (lien) {
+      grid.appendChild(buildCard(lien));
+    });
+    section.appendChild(grid);
+    return section;
+  }
+
+  function buildMenu(data) {
+    menuEl.innerHTML = "";
+    data.forEach(function (cat) {
+      const a = document.createElement("a");
+      a.href = "#" + slugify(cat.categorie);
+      a.textContent = cat.categorie;
+      menuEl.appendChild(a);
+    });
+  }
+
   function render(data) {
     if (data.length === 0) {
       showMessage("Aucun lien pour l'instant.");
       return;
     }
-    // Affichage complet implémenté en Task 4.
-    showMessage("Données chargées : " + data.length + " catégorie(s).");
+    appEl.innerHTML = "";
+    buildMenu(data);
+    data.forEach(function (cat) {
+      appEl.appendChild(buildCategory(cat));
+    });
   }
 
   loadData()
