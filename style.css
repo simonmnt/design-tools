@@ -122,19 +122,25 @@ body {
 }
 
 .card {
+    --accent: var(--foreground);
+
     display: flex;
     align-items: center;
     gap: 8px;
     min-width: 0;
     padding: 8px 12px;
     text-decoration: none;
-    transition: background-color 0.16s ease, color 0.16s ease;
+    transition: background-color 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
 
     color: var(--foreground);
 }
 
 .card:hover {
-    background-color: var(--primary-foreground);
+    background-color: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.card:hover .card-name {
+    color: color-mix(in srgb, var(--accent) 15%, var(--foreground));
 }
 
 .card-favicon,

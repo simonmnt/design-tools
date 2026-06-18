@@ -33,6 +33,37 @@
       .replace(/^-+|-+$/g, "");
   }
 
+  // Couleur dominante du favicon : moyenne pondérée par la saturation,
+  // en ignorant les pixels transparents, quasi blancs ou quasi noirs.
+  function dominantColor(img) {
+    const size = 32;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0, size, size);
+
+    let pixels;
+    try {
+      pixels = ctx.getImageData(0, 0, size, size).data;
+    } catch (e) {
+      return null; // canvas "tainted" : on abandonne proprement
+    }
+
+    let r = 0, g = 0, b = 0, total = 0;
+    for (let i = 0; i < pixels.length; i += 4) {
+      const pr = pixels[i], pg = pixels[i + 1], pb = pixels[i + 2], pa = pixels[i + 3];
+      if (pa < 128) continue;
+      const max = Math.max(pr, pg, pb), min = Math.min(pr, pg, pb);
+      if (max > 244 && min > 244) continue; // quasi blanc
+      if (max < 12) continue;                // quasi noir
+      const weight = (max - min) + 12;        // saturation + base pour les logos gris
+      r += pr * weight; g += pg * weight; b += pb * weight; total += weight;
+    }
+    if (total === 0) return null;
+    return "rgb(" + Math.round(r / total) + " " + Math.round(g / total) + " " + Math.round(b / total) + ")";
+  }
+
   function buildCard(lien) {
     const card = document.createElement("a");
     card.className = "card";
@@ -47,7 +78,12 @@
     img.className = "card-favicon";
     img.alt = "";
     img.loading = "lazy";
-    img.src = "https://www.google.com/s2/favicons?domain=" + encodeURIComponent(domain) + "&sz=64";
+    img.crossOrigin = "anonymous"; // nécessaire pour lire les pixels (favicone.com renvoie ACAO *)
+    img.src = "https://favicone.com/" + encodeURIComponent(domain) + "?s=64";
+    img.addEventListener("load", function () {
+      const color = dominantColor(img);
+      if (color) card.style.setProperty("--accent", color);
+    });
     img.addEventListener("error", function () {
       const fallback = document.createElement("span");
       fallback.className = "card-fallback";
