@@ -15,6 +15,7 @@
     "categorie": "Fonts",
     "liens": [
       { "nom": "Fontshare", "url": "https://fontshare.com/" },
+      { "nom": "Google Fonts", "url": "https://fonts.google.com/" },
       { "nom": "Best Free Fonts", "url": "https://bestfreefonts.com/" },
       { "nom": "Pousse ta fonte", "url": "https://www.poussetafonte.com/" }
     ]
