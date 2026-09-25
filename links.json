@@ -23,6 +23,13 @@
     ]
   },
   {
+    "categorie": "Components",
+    "liens": [
+      { "nom": "Shadcn", "url": "https://ui.shadcn.com/" },
+      { "nom": "ReUI", "url": "https://reui.io/" }
+    ]
+  },
+  {
     "categorie": "Icons",
     "liens": [
       { "nom": "Phosphor", "url": "https://phosphoricons.com/" },
