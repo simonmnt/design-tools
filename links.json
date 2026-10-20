@@ -26,7 +26,8 @@
     "categorie": "Components",
     "liens": [
       { "nom": "Shadcn", "url": "https://ui.shadcn.com/" },
-      { "nom": "ReUI", "url": "https://reui.io/" }
+      { "nom": "ReUI", "url": "https://reui.io/" },
+      { "nom": "21st", "url": "https://21st.dev/" }
     ]
   },
   {
